@@ -1,5 +1,7 @@
 package by.bsuir.sensor.sensor;
 
+import by.bsuir.sensor.sensortype.SensorType;
+import by.bsuir.sensor.unit.Unit;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

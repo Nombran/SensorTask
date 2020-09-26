@@ -2,6 +2,7 @@ package by.bsuir.sensor.sensor;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -13,7 +14,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class SensorDto {
+public class SensorDto extends RepresentationModel<SensorDto> {
     private long id;
     @NonNull
     @NotBlank

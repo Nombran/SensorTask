@@ -1,5 +1,9 @@
 package by.bsuir.sensor.sensor;
 
+import by.bsuir.sensor.sensortype.SensorType;
+import by.bsuir.sensor.sensortype.SensorTypeDao;
+import by.bsuir.sensor.unit.Unit;
+import by.bsuir.sensor.unit.UnitDao;
 import lombok.AllArgsConstructor;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
@@ -11,6 +15,8 @@ import javax.annotation.PostConstruct;
 @AllArgsConstructor
 public class SensorDtoMapper {
     private final ModelMapper mapper;
+    private final UnitDao unitDao;
+    private final SensorTypeDao sensorTypeDao;
 
     @PostConstruct
     public void setupMapper() {
@@ -47,9 +53,15 @@ public class SensorDtoMapper {
 
     public void mapSpecificFields(SensorDto source, Sensor destination) {
         String type = source.getSensorType();
-        destination.setSensorType(new SensorType(type));
-        String unit = source.getUnit();
-        destination.setUnit(new Unit(unit));
+        SensorType sensorType = sensorTypeDao.find(type).orElseThrow(
+                () -> new IllegalArgumentException("There is no sensor type with name " + type)
+        );
+        destination.setSensorType(sensorType);
+        String unitName = source.getUnit();
+        Unit unit = unitDao.find(unitName).orElseThrow(
+                () -> new IllegalArgumentException("There is no unit with name " + unitName)
+        );
+        destination.setUnit(unit);
     }
 
     public void mapSpecificFields(Sensor source, SensorDto destination) {

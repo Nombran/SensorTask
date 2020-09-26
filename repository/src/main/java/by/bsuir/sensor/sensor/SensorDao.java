@@ -1,5 +1,7 @@
 package by.bsuir.sensor.sensor;
 
+import by.bsuir.sensor.sensortype.SensorType_;
+import by.bsuir.sensor.unit.Unit_;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 

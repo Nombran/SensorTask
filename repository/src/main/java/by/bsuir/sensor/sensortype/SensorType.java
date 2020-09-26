@@ -1,4 +1,4 @@
-package by.bsuir.sensor.sensor;
+package by.bsuir.sensor.sensortype;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
