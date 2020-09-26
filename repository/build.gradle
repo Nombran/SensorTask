@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id "org.springframework.boot"
+}
+
+group 'by.bsuir.sensor'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.14'
+    api 'org.springframework.boot:spring-boot-starter-data-jpa'
+    testImplementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+    api 'org.springframework.boot:spring-boot-starter-aop'
+    compileOnly ('org.hibernate:hibernate-jpamodelgen')
+    annotationProcessor('org.hibernate:hibernate-jpamodelgen')
+}

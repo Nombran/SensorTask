@@ -1,0 +1,6 @@
+rootProject.name = 'WorkTask'
+include 'service'
+include 'repository'
+include 'web'
+include 'repository'
+
