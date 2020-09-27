@@ -3,6 +3,7 @@ package by.bsuir.sensor.sensor;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -34,6 +35,7 @@ public class SensorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Secured("ROLE_ADMIN")
     public SensorDto create(@Valid @RequestBody SensorDto sensorDto) {
         sensorDto = sensorService.create(sensorDto);
         return sensorHateoasUtil.createSelfRelLink(sensorDto);
@@ -41,6 +43,7 @@ public class SensorController {
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @Secured("ROLE_ADMIN")
     public SensorDto update(@Valid @RequestBody SensorDto sensorDto, @PathVariable(name = "id")long id) {
         sensorDto = sensorService.update(sensorDto, id);
         return sensorHateoasUtil.createSelfRelLink(sensorDto);
@@ -48,6 +51,7 @@ public class SensorController {
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
+    @Secured("ROLE_ADMIN")
     public SensorDto delete(@PathVariable(name = "id")long id) {
         return sensorService.delete(id);
     }

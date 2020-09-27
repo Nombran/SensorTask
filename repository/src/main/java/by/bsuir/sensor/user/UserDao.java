@@ -20,10 +20,6 @@ public class UserDao {
         this.em = em;
     }
 
-    public void create(User user) {
-        em.persist(user);
-    }
-
     public Optional<User> find(long id) {
         return Optional.ofNullable(em.find(User.class, id));
     }

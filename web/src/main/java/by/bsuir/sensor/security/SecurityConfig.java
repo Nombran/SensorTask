@@ -22,10 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     private static final String LOGIN_ENDPOINT = "/api/v1/auth/login";
-    private static final String SIGN_UP_ENDPOINT = "/api/v1/users";
-    private static final String FIND_CERTIFICATES_ENDPOINT = "/api/v1/certificates";
-    private static final String FIND_TAGS_ENDPOINT = "/api/v1/tags";
-    private static final String FIND_CERTIFICATE_BY_ID = "/api/v1/certificates/{\\d+}";
+    private static final String FIND_SENSORS_ENDPOINT = "/api/v1/sensors";
 
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -49,10 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST,LOGIN_ENDPOINT).anonymous()
-                .antMatchers(HttpMethod.POST, SIGN_UP_ENDPOINT).anonymous()
-                .antMatchers(HttpMethod.GET, FIND_CERTIFICATES_ENDPOINT).permitAll()
-                .antMatchers(HttpMethod.GET, FIND_CERTIFICATE_BY_ID).permitAll()
-                .antMatchers(HttpMethod.GET, FIND_TAGS_ENDPOINT).permitAll()
+                .antMatchers(HttpMethod.GET, FIND_SENSORS_ENDPOINT).permitAll()
                 .anyRequest().fullyAuthenticated()
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider))
@@ -62,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:4200")
+                .allowedOrigins("*")
                 .allowedMethods("*");
     }
 }

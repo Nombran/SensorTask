@@ -1,5 +1,7 @@
 package by.bsuir.sensor.handler;
 
+import by.bsuir.sensor.sensor.SensorNotFoundException;
+import by.bsuir.sensor.user.UserNotFoundException;
 import org.modelmapper.MappingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -84,24 +86,15 @@ public class GlobalControllerExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({
-            NoHandlerFoundException.class
+            NoHandlerFoundException.class,
+            SensorNotFoundException.class,
+            UserNotFoundException.class
     })
     public ErrorResponse handleResourceNotFound(Exception ex) {
         ErrorResponse error = new ErrorResponse();
         error.setTimestamp(LocalDateTime.now());
         error.setStatus(HttpStatus.NOT_FOUND.value());
         error.setError(HttpStatus.NOT_FOUND.toString());
-        error.setMessage(ex.getMessage());
-        return error;
-    }
-
-    @ResponseStatus(HttpStatus.CONFLICT)
-    @ExceptionHandler({})
-    public ErrorResponse handleServiceConflictException(RuntimeException ex) {
-        ErrorResponse error = new ErrorResponse();
-        error.setTimestamp(LocalDateTime.now());
-        error.setStatus(HttpStatus.CONFLICT.value());
-        error.setError(HttpStatus.CONFLICT.toString());
         error.setMessage(ex.getMessage());
         return error;
     }
